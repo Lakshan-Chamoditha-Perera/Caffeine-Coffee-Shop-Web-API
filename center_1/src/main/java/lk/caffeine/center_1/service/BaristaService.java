@@ -8,4 +8,6 @@ import lk.caffeine.center_1.dto.BaristaDto;
  */
 
 public interface BaristaService extends SuperService<BaristaDto, String> {
+    boolean existsById(String id);
+    String getOngoingBaristaId();
 }

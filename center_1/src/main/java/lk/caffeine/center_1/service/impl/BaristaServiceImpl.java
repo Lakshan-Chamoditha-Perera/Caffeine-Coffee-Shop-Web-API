@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -23,7 +24,7 @@ public class BaristaServiceImpl implements BaristaService {
 
     @Override
     public boolean save(BaristaDto dto) {
-        if (baristaRepository.existsById(dto.getId())) {
+        if (existsById(dto.getId())) {
             throw new RuntimeException("Barista already exists");
         }
         dto.setId(getOngoingBaristaId());
@@ -31,7 +32,13 @@ public class BaristaServiceImpl implements BaristaService {
         return true;
     }
 
-    private String getOngoingBaristaId() {
+    @Override
+    public boolean existsById(String id) {
+        return baristaRepository.existsById(id);
+    }
+
+    @Override
+    public String getOngoingBaristaId() {
         List<Barista> all = baristaRepository.findAll();
         if (all.isEmpty()) {
             return "B001";
@@ -44,17 +51,27 @@ public class BaristaServiceImpl implements BaristaService {
 
     @Override
     public boolean update(BaristaDto dto) {
-        return false;
+        Barista barista = mapper.map(dto, Barista.class);
+        baristaRepository.save(barista);
+        return true;
     }
 
     @Override
     public boolean delete(String id) {
-        return false;
+        if (existsById(id)) {
+            baristaRepository.deleteById(id);
+            return true;
+        }
+        throw new RuntimeException("No such barista for delete..!");
     }
 
     @Override
-    public BaristaDto search(String id) {
-        return null;
+    public BaristaDto search(String id) throws RuntimeException {
+        Optional<Barista> byId = baristaRepository.findById(id);
+        if (byId.isPresent()) {
+            return mapper.map(byId.get(), BaristaDto.class);
+        }
+        throw new RuntimeException("No Barista for id: " + id);
     }
 
     @Override
@@ -62,4 +79,5 @@ public class BaristaServiceImpl implements BaristaService {
         List<BaristaDto> collect = baristaRepository.findAll().stream().map(barista -> mapper.map(barista, BaristaDto.class)).collect(Collectors.toList());
         return collect;
     }
+
 }
