@@ -54,7 +54,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public boolean existsById(String id) {
-        return false;
+        return customerRepository.existsById(id);
     }
 
     @Override
