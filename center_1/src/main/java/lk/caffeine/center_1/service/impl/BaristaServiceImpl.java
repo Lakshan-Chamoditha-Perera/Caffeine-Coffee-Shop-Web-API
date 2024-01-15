@@ -1,11 +1,15 @@
 package lk.caffeine.center_1.service.impl;
 
+import lk.caffeine.center_1.dao.BaristaRepository;
 import lk.caffeine.center_1.dto.BaristaDto;
+import lk.caffeine.center_1.dto.CustomerDto;
 import lk.caffeine.center_1.service.BaristaService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Author: shan
@@ -14,6 +18,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class BaristaServiceImpl implements BaristaService {
+    private final BaristaRepository baristaRepository;
+    private final ModelMapper mapper;
     @Override
     public boolean save(BaristaDto dto) {
         return false;
@@ -36,6 +42,7 @@ public class BaristaServiceImpl implements BaristaService {
 
     @Override
     public List<BaristaDto> getAll() {
-        return null;
+        List<BaristaDto> collect = baristaRepository.findAll().stream().map(barista -> mapper.map(barista, BaristaDto.class)).collect(Collectors.toList());
+        return collect;
     }
 }
