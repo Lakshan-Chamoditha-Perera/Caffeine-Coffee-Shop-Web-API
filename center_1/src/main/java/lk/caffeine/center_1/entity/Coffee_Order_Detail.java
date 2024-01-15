@@ -14,14 +14,12 @@ import java.sql.Date;
  */
 @Entity
 public class Coffee_Order_Detail {
-    //   auto increment
     @Id
     @GeneratedValue
     private int id;
 
     @CreationTimestamp
     private Date date;
-
     @ManyToOne
     private Orders order;
     @ManyToOne

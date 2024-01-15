@@ -29,6 +29,6 @@ public class Orders {
     @ManyToOne
     private Customer customer;
 
-    @OneToMany
+    @OneToMany(mappedBy = "order")
     private List<Coffee_Order_Detail> coffee_order_detail;
 }
