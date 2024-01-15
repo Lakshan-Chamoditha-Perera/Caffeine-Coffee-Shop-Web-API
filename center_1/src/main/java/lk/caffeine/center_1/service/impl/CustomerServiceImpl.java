@@ -39,8 +39,12 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public boolean delete(String id) {
-        return false;
+    public boolean delete(String id) throws RuntimeException {
+        if (existsById(id)) {
+            customerRepository.deleteById(id);
+            return true;
+        }
+        throw new RuntimeException("No such customer for delete..!");
     }
 
     @Override

@@ -47,27 +47,31 @@ public class CustomerController {
 
     @PatchMapping(consumes = "application/json")
     @RequestMapping("/update")
-    public StandardMessageResponse update(@Valid @RequestBody CustomerDto customerDto, BindingResult bindingResult) {
+    public ResponseEntity<StandardMessageResponse>  update(@Valid @RequestBody CustomerDto customerDto, BindingResult bindingResult) {
         System.out.println(customerDto);
         if (bindingResult.hasErrors()) {
-            return new StandardMessageResponse(500, "Fail", bindingResult.getAllErrors());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new StandardMessageResponse(500, "Fail", bindingResult.getAllErrors()));
         }
         try {
             if (customerService.existsById(customerDto.getId())) {
                 customerService.update(customerDto);
-                return new StandardMessageResponse(200, "Success", null);
+                return ResponseEntity.ok(new StandardMessageResponse(200, "Success", null));
             }
-            return new StandardMessageResponse(500, "Fail", "No such customer for update..!");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new StandardMessageResponse(500, "Error ", "No such customer for update..!"));
         } catch (RuntimeException e) {
-            return new StandardMessageResponse(500, "Error ", e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new StandardMessageResponse(500, "Error ", e.getMessage()));
         }
     }
 
     @DeleteMapping
     @RequestMapping("/delete")
-    public StandardMessageResponse delete(@RequestParam String id) {
-
-        return new StandardMessageResponse(200, "Success", null);
+    public ResponseEntity<StandardMessageResponse>  delete(@RequestParam String id) {
+        try {
+            customerService.delete(id);
+            return ResponseEntity.ok(new StandardMessageResponse(200, "Success", null));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new StandardMessageResponse(500, "Error ", e.getMessage()));
+        }
     }
 
     @GetMapping
