@@ -13,4 +13,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 @EnableJpaRepositories
 public interface CustomerRepository extends JpaRepository<Customer, String> {
+    boolean existsCustomerById(String id);
+
+    boolean deleteCustomerById(String id);
+
+    Customer findCustomerById(String id);
+
+    boolean updateCustomerById(String id, Customer customer);
+
 }
