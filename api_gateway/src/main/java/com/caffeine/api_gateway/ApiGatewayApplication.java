@@ -1,14 +1,13 @@
-
-package com.caffeine.center_2;
+package com.caffeine.api_gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Center2Application {
+public class ApiGatewayApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Center2Application.class, args);
+		SpringApplication.run(ApiGatewayApplication.class, args);
 	}
 
 }

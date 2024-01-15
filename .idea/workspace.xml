@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c619ca5d-7335-48bf-a64f-75b3cbc3dc81" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/discovery_server/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/discovery_server/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/center_2/src/main/java/com/caffeine/center_2/Center2Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/center_2/src/main/java/com/caffeine/center_2/Center2Application.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,14 +50,14 @@
     "dart.analysis.tool.window.visible": "false",
     "jdk.selected.JAVA_MODULE": "corretto-17",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/shan/Desktop/Caffeine Coffee Shop/discovery_server",
+    "last_opened_file_path": "/home/shan/Desktop/Caffeine Coffee Shop/api_gateway",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
+    "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "run.configurations.included.in.services": "true",
     "settings.editor.selected.configurable": "LermitageExtraTci",
@@ -91,6 +89,13 @@
     <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
       <module name="Caffeine Coffee Shop" />
       <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="api_gateway" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.caffeine.api_gateway.ApiGatewayApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -146,7 +151,7 @@
       <workItem from="1705320437395" duration="694000" />
       <workItem from="1705321157336" duration="715000" />
       <workItem from="1705322619508" duration="47000" />
-      <workItem from="1705323001517" duration="1611000" />
+      <workItem from="1705323001517" duration="1945000" />
     </task>
     <servers />
   </component>
