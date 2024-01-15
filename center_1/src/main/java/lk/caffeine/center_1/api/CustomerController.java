@@ -12,6 +12,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,7 +28,8 @@ public class CustomerController {
     @GetMapping
     @RequestMapping("/getAll")
     public StandardMessageResponse getAll() {
-        return new StandardMessageResponse(200, "Success", null);
+        List<CustomerDto> customerDtoList = customerService.getAll();
+        return new StandardMessageResponse(200, "Success", customerDtoList);
     }
 
     @PostMapping
@@ -47,7 +49,7 @@ public class CustomerController {
 
     @PatchMapping(consumes = "application/json")
     @RequestMapping("/update")
-    public ResponseEntity<StandardMessageResponse>  update(@Valid @RequestBody CustomerDto customerDto, BindingResult bindingResult) {
+    public ResponseEntity<StandardMessageResponse> update(@Valid @RequestBody CustomerDto customerDto, BindingResult bindingResult) {
         System.out.println(customerDto);
         if (bindingResult.hasErrors()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new StandardMessageResponse(500, "Fail", bindingResult.getAllErrors()));
@@ -65,7 +67,7 @@ public class CustomerController {
 
     @DeleteMapping
     @RequestMapping("/delete")
-    public ResponseEntity<StandardMessageResponse>  delete(@RequestParam String id) {
+    public ResponseEntity<StandardMessageResponse> delete(@RequestParam String id) {
         try {
             customerService.delete(id);
             return ResponseEntity.ok(new StandardMessageResponse(200, "Success", null));
@@ -76,21 +78,27 @@ public class CustomerController {
 
     @GetMapping
     @RequestMapping("/existsById")
-    public StandardMessageResponse existsById(@RequestParam String id) {
-        return new StandardMessageResponse(200, "Success", null);
+    public ResponseEntity<StandardMessageResponse> existsById(@RequestParam String id) {
+        try {
+            if (customerService.existsById(id)) {
+                return ResponseEntity.ok(new StandardMessageResponse(200, "Success", null));
+            }
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new StandardMessageResponse(500, "Error ", "No such customer for delete..!"));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new StandardMessageResponse(500, "Error ", e.getMessage()));
+        }
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public StandardMessageResponse handleValidationExceptions(MethodArgumentNotValidException ex) {
+    public ResponseEntity<StandardMessageResponse> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach(error -> {
             String fieldName = ((org.springframework.validation.FieldError) error).getField();
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
         });
-
-        return new StandardMessageResponse(500, "Fail", errors);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new StandardMessageResponse(500, "Fail", errors));
     }
 
 }

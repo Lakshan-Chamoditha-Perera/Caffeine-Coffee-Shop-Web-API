@@ -19,6 +19,4 @@ public interface CustomerRepository extends JpaRepository<Customer, String> {
 
     Customer findCustomerById(String id);
 
-    boolean updateCustomerById(String id, Customer customer);
-
 }

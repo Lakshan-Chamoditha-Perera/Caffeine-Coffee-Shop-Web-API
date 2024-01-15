@@ -9,6 +9,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Author: shan
@@ -35,7 +37,8 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public boolean update(CustomerDto dto) {
         Customer customer = mapper.map(dto, Customer.class);
-        return customerRepository.updateCustomerById(customer.getId(), customer);
+        customerRepository.save(customer);
+        return true;
     }
 
     @Override
@@ -48,13 +51,18 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDto search(String id) {
-        return null;
+    public CustomerDto search(String id) throws RuntimeException {
+        Optional<Customer> byId = customerRepository.findById(id);
+        if (byId.isPresent()) {
+            return mapper.map(byId.get(), CustomerDto.class);
+        }
+        throw new RuntimeException("No customer for id: " + id);
     }
 
     @Override
     public List<CustomerDto> getAll() {
-        return null;
+        List<CustomerDto> collect = customerRepository.findAll().stream().map(customer -> mapper.map(customer, CustomerDto.class)).collect(Collectors.toList());
+        return collect;
     }
 
     @Override
