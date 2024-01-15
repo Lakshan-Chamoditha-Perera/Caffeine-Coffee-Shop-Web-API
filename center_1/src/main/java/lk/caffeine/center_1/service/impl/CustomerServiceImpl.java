@@ -34,7 +34,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public boolean update(CustomerDto dto) {
-        return false;
+        Customer customer = mapper.map(dto, Customer.class);
+        return customerRepository.updateCustomerById(customer.getId(), customer);
     }
 
     @Override
