@@ -4,11 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c619ca5d-7335-48bf-a64f-75b3cbc3dc81" name="Changes" comment="" />
+    <list default="true" id="c619ca5d-7335-48bf-a64f-75b3cbc3dc81" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/discovery_server/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/discovery_server/src/main/resources/application.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="5" />
@@ -40,6 +47,7 @@
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.DiscoveryServerApplication.executor": "Run",
     "dart.analysis.tool.window.visible": "false",
     "jdk.selected.JAVA_MODULE": "corretto-17",
@@ -138,7 +146,7 @@
       <workItem from="1705320437395" duration="694000" />
       <workItem from="1705321157336" duration="715000" />
       <workItem from="1705322619508" duration="47000" />
-      <workItem from="1705323001517" duration="351000" />
+      <workItem from="1705323001517" duration="1611000" />
     </task>
     <servers />
   </component>
