@@ -21,6 +21,7 @@ public class BaristaDto {
     private String id;
     @NotNull(message = "Barista Name is mandatory")
     private String name;
+
     @NotNull(message = "Barista Address is mandatory")
     private String address;
 

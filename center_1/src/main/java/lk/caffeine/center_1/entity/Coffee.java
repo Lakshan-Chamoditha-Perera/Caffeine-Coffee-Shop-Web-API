@@ -32,7 +32,6 @@ public class Coffee {
     @OneToMany(mappedBy = "coffee")
     @ToString.Exclude
     private List<Coffee_Order_Detail> coffee_order_detail;
-
     @ManyToOne
     private Barista barista;
 }
