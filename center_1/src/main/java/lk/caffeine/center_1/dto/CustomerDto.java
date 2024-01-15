@@ -1,6 +1,5 @@
 package lk.caffeine.center_1.dto;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
@@ -18,10 +17,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class CustomerDto {
 
-    @Pattern(regexp = "C\\d{3,}", message = "Invalid Customer ID")
-    @NotNull(message = "Customer ID is mandatory")
     private String id;
-
     @NotNull(message = "Customer Name is mandatory")
     @Pattern(regexp = "[A-Za-z .]+", message = "Invalid Name")
     private String name;

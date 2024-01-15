@@ -2,7 +2,9 @@ package lk.caffeine.center_1.api;
 
 import jakarta.validation.Valid;
 import lk.caffeine.center_1.dto.CustomerDto;
+import lk.caffeine.center_1.service.CustomerService;
 import lk.caffeine.center_1.util.payload.StandardMessageResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -18,7 +20,10 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/v1/customer")
-public class CustomerRepo {
+@RequiredArgsConstructor
+public class CustomerController {
+    private final CustomerService customerService;
+
     @GetMapping
     @RequestMapping("/getAll")
     public StandardMessageResponse getAll() {
@@ -30,9 +35,14 @@ public class CustomerRepo {
     public ResponseEntity<StandardMessageResponse> save(@Valid @RequestBody CustomerDto customerDto, BindingResult bindingResult) {
         System.out.println(customerDto);
         if (bindingResult.hasErrors()) {
-            return ResponseEntity.badRequest().body(new StandardMessageResponse(500, "Fail", bindingResult.getAllErrors()));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new StandardMessageResponse(500, "Fail", bindingResult.getAllErrors()));
         }
-        return ResponseEntity.ok(new StandardMessageResponse(200, "Success", null));
+        try {
+            customerService.save(customerDto);
+            return ResponseEntity.ok(new StandardMessageResponse(200, "Success", null));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new StandardMessageResponse(500, "Error ", e.getMessage()));
+        }
     }
 
     @PatchMapping(consumes = "application/json")
