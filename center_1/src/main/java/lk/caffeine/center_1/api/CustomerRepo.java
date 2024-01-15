@@ -1,5 +1,6 @@
 package lk.caffeine.center_1.api;
 
+import lk.caffeine.center_1.dto.CustomerDto;
 import lk.caffeine.center_1.util.payload.StandardMessageResponse;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,7 @@ public class CustomerRepo {
 
     @PostMapping
     @RequestMapping("/save")
-    public StandardMessageResponse save() {
+    public StandardMessageResponse save(@RequestBody CustomerDto dto) {
         return new StandardMessageResponse(200, "Success", null);
     }
 
