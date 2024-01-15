@@ -37,8 +37,12 @@ public class CoffeeServiceImpl implements CoffeeService {
     }
 
     @Override
-    public boolean delete(String id) {
-        return false;
+    public boolean delete(String id) throws RuntimeException{
+        if(coffeeRepository.existsById(id)){
+            coffeeRepository.deleteById(id);
+            return true;
+        }
+        throw new RuntimeException("No Coffee for delete ID: " + id);
     }
 
     @Override

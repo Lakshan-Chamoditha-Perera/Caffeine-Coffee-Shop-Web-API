@@ -9,10 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Author: shan
@@ -38,5 +35,16 @@ public class CoffeeController {
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new StandardMessageResponse(500, "Error ", e.getMessage()));
         }
+    }
+
+    @DeleteMapping
+    @RequestMapping("/delete")
+    public StandardMessageResponse delete(@RequestParam String id) {
+       try{
+           coffeeService.delete(id);
+           return new StandardMessageResponse(200, "Success", null);
+       }catch (RuntimeException e){
+              return new StandardMessageResponse(500, "Error", e.getMessage());
+       }
     }
 }
