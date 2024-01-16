@@ -37,8 +37,8 @@ public class CoffeeServiceImpl implements CoffeeService {
     }
 
     @Override
-    public boolean delete(String id) throws RuntimeException{
-        if(coffeeRepository.existsById(id)){
+    public boolean delete(String id) throws RuntimeException {
+        if (coffeeRepository.existsById(id)) {
             coffeeRepository.deleteById(id);
             return true;
         }
@@ -52,6 +52,7 @@ public class CoffeeServiceImpl implements CoffeeService {
 
     @Override
     public List<CoffeeDto> getAll() {
-        return null;
+        List<Coffee> coffeeRepositoryAll = coffeeRepository.findAll();
+        return coffeeRepositoryAll.stream().map(c -> mapper.map(c, CoffeeDto.class)).toList();
     }
 }
