@@ -1,7 +1,6 @@
 package lk.caffeine.center_1.api;
 
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Pattern;
 import lk.caffeine.center_1.dto.CoffeeDto;
 import lk.caffeine.center_1.service.BaristaService;
 import lk.caffeine.center_1.service.CoffeeService;
@@ -10,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,13 +42,14 @@ public class CoffeeController {
     @DeleteMapping
     @RequestMapping("/delete")
     public StandardMessageResponse delete(@RequestParam String id) {
-       try{
-           coffeeService.delete(id);
-           return new StandardMessageResponse(200, "Success", null);
-       }catch (RuntimeException e){
-              return new StandardMessageResponse(500, "Error", e.getMessage());
-       }
+        try {
+            coffeeService.delete(id);
+            return new StandardMessageResponse(200, "Success", null);
+        } catch (RuntimeException e) {
+            return new StandardMessageResponse(500, "Error", e.getMessage());
+        }
     }
+
     @GetMapping
     @RequestMapping("/getAll")
     public StandardMessageResponse getAll() {
@@ -64,6 +63,11 @@ public class CoffeeController {
         if (bindingResult.hasErrors()) {
             return new StandardMessageResponse(500, "Fail", bindingResult.getAllErrors());
         }
-        return new StandardMessageResponse(200, "Success", null);
+        try {
+            coffeeService.update(coffeeDto);
+            return new StandardMessageResponse(200, "Success", null);
+        } catch (RuntimeException e) {
+            return new StandardMessageResponse(500, "Error", e.getMessage());
+        }
     }
 }

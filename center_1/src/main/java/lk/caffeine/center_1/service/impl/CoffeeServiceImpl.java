@@ -32,8 +32,13 @@ public class CoffeeServiceImpl implements CoffeeService {
     }
 
     @Override
-    public boolean update(CoffeeDto dto) {
-        return false;
+    public boolean update(CoffeeDto dto) throws RuntimeException {
+        if (!coffeeRepository.existsById(dto.getId())) {
+            throw new RuntimeException("No such Coffee for update..!");
+        }
+        Coffee map = mapper.map(dto, Coffee.class);
+        coffeeRepository.save(map);
+        return true;
     }
 
     @Override
