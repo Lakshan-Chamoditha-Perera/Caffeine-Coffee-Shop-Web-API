@@ -7,4 +7,5 @@ import lk.caffeine.center_1.dto.OrdersDto;
  * Created: 1/16/24 11:58 AM
  */
 public interface OrdersService extends SuperService<OrdersDto,String>{
+        String getOngoingOrderId();
 }

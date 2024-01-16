@@ -1,5 +1,6 @@
 package lk.caffeine.center_1.service.impl;
 
+import lk.caffeine.center_1.dao.OrdersRepository;
 import lk.caffeine.center_1.dto.OrdersDto;
 import lk.caffeine.center_1.service.OrdersService;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class OrdersServiceImpl implements OrdersService {
+    private final OrdersRepository ordersRepository;
+
     @Override
     public boolean save(OrdersDto dto) {
         return false;
@@ -37,5 +40,12 @@ public class OrdersServiceImpl implements OrdersService {
     @Override
     public List<OrdersDto> getAll() {
         return null;
+    }
+
+
+    @Override
+    public String getOngoingOrderId() {
+        String lastOrderId = ordersRepository.getLastOrderId();
+        return lastOrderId == null ? "O001" : "O" + (Integer.parseInt(lastOrderId.replace("O", "")) + 1);
     }
 }
