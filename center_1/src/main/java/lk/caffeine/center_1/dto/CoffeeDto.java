@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class CoffeeDto {
 
-    private String id;
+    private String cid;
 
     @NotNull(message = "Coffee Name is mandatory")
     private String name;

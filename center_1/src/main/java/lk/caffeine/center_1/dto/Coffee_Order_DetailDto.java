@@ -22,5 +22,5 @@ import java.sql.Date;
 public class Coffee_Order_DetailDto {
    private String order_id;
    private String coffee_id;
-   private Integer qty;
+   private int qty;
 }

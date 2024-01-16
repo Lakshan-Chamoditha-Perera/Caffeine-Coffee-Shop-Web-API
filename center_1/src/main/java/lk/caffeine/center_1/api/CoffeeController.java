@@ -31,7 +31,6 @@ public class CoffeeController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new StandardMessageResponse(500, "Fail", bindingResult.getAllErrors()));
         }
         try {
-            System.out.println(coffeeDto);
             coffeeService.save(coffeeDto);
             return ResponseEntity.ok(new StandardMessageResponse(200, "Success", null));
         } catch (RuntimeException e) {

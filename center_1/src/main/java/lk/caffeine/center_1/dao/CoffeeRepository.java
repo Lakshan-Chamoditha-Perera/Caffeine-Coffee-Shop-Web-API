@@ -12,4 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 @EnableJpaRepositories
 public interface CoffeeRepository extends JpaRepository<Coffee,String> {
+    Coffee findCoffeeByCid(String cid);
+
+
 }

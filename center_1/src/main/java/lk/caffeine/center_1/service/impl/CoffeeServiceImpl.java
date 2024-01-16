@@ -23,17 +23,16 @@ public class CoffeeServiceImpl implements CoffeeService {
 
     @Override
     public boolean save(CoffeeDto dto) throws RuntimeException {
-        if (coffeeRepository.existsById(dto.getId())) {
+        if (coffeeRepository.existsById(dto.getCid())) {
             throw new RuntimeException("Coffee already exists");
         }
         Coffee map = mapper.map(dto, Coffee.class);
         coffeeRepository.save(map);
         return true;
     }
-
     @Override
     public boolean update(CoffeeDto dto) throws RuntimeException {
-        if (!coffeeRepository.existsById(dto.getId())) {
+        if (!coffeeRepository.existsById(dto.getCid())) {
             throw new RuntimeException("No such Coffee for update..!");
         }
         Coffee map = mapper.map(dto, Coffee.class);

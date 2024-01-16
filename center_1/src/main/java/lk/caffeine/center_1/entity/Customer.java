@@ -3,9 +3,7 @@ package lk.caffeine.center_1.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Date;
@@ -18,7 +16,9 @@ import java.util.List;
  */
 
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class Customer {
@@ -33,5 +33,6 @@ public class Customer {
     private Date date;
 
     @OneToMany(mappedBy = "customer")
+    @ToString.Exclude
     private List<Orders> orders = new ArrayList<>();
 }

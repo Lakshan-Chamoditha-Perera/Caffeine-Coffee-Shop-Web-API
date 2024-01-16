@@ -18,9 +18,9 @@ public class OrdersController {
     private final OrdersService ordersService;
 
     @PostMapping(consumes = "application/json")
+    @RequestMapping("/save")
     public ResponseEntity<StandardMessageResponse> saveOrder(@RequestBody OrdersDto ordersDto){
-
-        ordersService.save(ordersDto);
+           ordersService.save(ordersDto);
         return ResponseEntity.ok(new StandardMessageResponse(200, "Success", null));
     }
 

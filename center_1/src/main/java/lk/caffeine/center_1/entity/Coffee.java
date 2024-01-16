@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
@@ -22,8 +21,7 @@ import java.util.List;
 @Data
 public class Coffee {
     @Id
-    private String id;
-
+    private String cid;
     private String name;
     private String description;
     private double price;

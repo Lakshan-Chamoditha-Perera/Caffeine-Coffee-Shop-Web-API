@@ -1,15 +1,11 @@
 package lk.caffeine.center_1.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,16 +16,22 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
 public class Orders {
     @Id
-    private String id;
+    private String order_id;
+
+    @CreationTimestamp
     private Date date;
+
     private double total;
 
     @ManyToOne
     private Customer customer;
 
-    @OneToMany(mappedBy = "order")
-    private List<Coffee_Order_Detail> coffee_order_detail;
+    @OneToMany(mappedBy = "order", cascade = {CascadeType.REFRESH},targetEntity = Coffee_Order_Detail.class)
+    private List<Coffee_Order_Detail> coffee_order_details_List = new ArrayList<>();
+
 }
