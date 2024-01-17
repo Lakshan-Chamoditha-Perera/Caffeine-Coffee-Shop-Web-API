@@ -14,12 +14,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 @EnableJpaRepositories
 public interface OrdersRepository extends JpaRepository<Orders, String> {
-    @Query(value="SELECT MAX (orderId) FROM Orders")
+    @Query(value = "SELECT MAX (orderId) FROM Orders")
     String getLastOrderId();
 
-    @Query(value="SELECT COUNT (orderId) FROM Orders")
+    @Query(value = "SELECT COUNT (orderId) FROM Orders")
     Integer getOrdersCount();
 
-    @Query(value="SELECT SUM (total) FROM Orders")
+    @Query(value = "SELECT SUM (total) FROM Orders")
     Double getTotalIncome();
 }

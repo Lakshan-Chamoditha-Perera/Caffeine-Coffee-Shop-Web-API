@@ -9,6 +9,7 @@ import lk.caffeine.center_1.entity.Customer;
 import lk.caffeine.center_1.entity.Orders;
 import lk.caffeine.center_1.service.OrdersService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class OrdersServiceImpl implements OrdersService {
     private final OrdersRepository ordersRepository;
     private final CoffeeRepository coffeeRepository;
     private final CustomerRepository customerRepository;
+    private final ModelMapper modelMapper;
 
     @Override
     public boolean save(OrdersDto ordersDto) throws RuntimeException {
@@ -54,23 +56,23 @@ public class OrdersServiceImpl implements OrdersService {
 
 
     @Override
-    public boolean update(OrdersDto dto) {
+    public boolean update(OrdersDto dto) throws UnsupportedOperationException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(String id) throws UnsupportedOperationException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public OrdersDto search(String id) {
-        return null;
+    public OrdersDto search(String id) throws UnsupportedOperationException {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public List<OrdersDto> getAll() {
-        return null;
+    public List<OrdersDto> getAll() throws UnsupportedOperationException {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 
