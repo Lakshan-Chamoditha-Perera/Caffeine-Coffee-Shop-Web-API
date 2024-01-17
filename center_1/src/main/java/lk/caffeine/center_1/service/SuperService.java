@@ -7,7 +7,7 @@ import java.util.List;
  * Created: 1/15/24 10:49 PM
  */
 public interface SuperService<T,U> {
-    boolean save(T dto);
+    boolean save(T dto) ;
 
     boolean update(T dto);
 

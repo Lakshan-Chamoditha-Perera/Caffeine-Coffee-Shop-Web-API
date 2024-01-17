@@ -27,7 +27,7 @@ public class OrdersServiceImpl implements OrdersService {
     private final CustomerRepository customerRepository;
 
     @Override
-    public boolean save(OrdersDto ordersDto) {
+    public boolean save(OrdersDto ordersDto) throws RuntimeException {
         Optional<Customer> customer = customerRepository.findById(ordersDto.getCustomer_id());
         if (!customer.isPresent()) {
             throw new RuntimeException("No customer for id: " + ordersDto.getCustomer_id());
@@ -42,9 +42,8 @@ public class OrdersServiceImpl implements OrdersService {
         List<Coffee> coffeeList = new ArrayList<>();
         for (int i = 0; i < ordersDto.getCoffeeList().size(); i++) {
             Optional<Coffee> coffee = coffeeRepository.findById(ordersDto.getCoffeeList().get(i).getCode());
-            if (!coffee.isPresent()) {
+            if (!coffee.isPresent())
                 throw new RuntimeException("No coffee for id: " + ordersDto.getCoffeeList().get(i).getCode());
-            }
             coffeeList.add(coffee.get());
         }
 
@@ -56,12 +55,12 @@ public class OrdersServiceImpl implements OrdersService {
 
     @Override
     public boolean update(OrdersDto dto) {
-        return false;
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public boolean delete(String id) {
-        return false;
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -79,5 +78,10 @@ public class OrdersServiceImpl implements OrdersService {
     public String getOngoingOrderId() {
         String lastOrderId = ordersRepository.getLastOrderId();
         return lastOrderId == null ? "O001" : "O" + (Integer.parseInt(lastOrderId.replace("O", "")) + 1);
+    }
+
+    @Override
+    public int getOrdersCount() {
+        return ordersRepository.getOrdersCount();
     }
 }

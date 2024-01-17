@@ -19,15 +19,29 @@ public class OrdersController {
 
     @PostMapping(consumes = "application/json")
     @RequestMapping("/save")
-    public ResponseEntity<StandardMessageResponse> saveOrder(@RequestBody OrdersDto ordersDto){
-           ordersService.save(ordersDto);
-        return ResponseEntity.ok(new StandardMessageResponse(200, "Success", null));
+    public ResponseEntity<StandardMessageResponse> saveOrder(@RequestBody OrdersDto ordersDto) {
+        try {
+            ordersService.save(ordersDto);
+            return ResponseEntity.ok(new StandardMessageResponse(200, "Success", null));
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(new StandardMessageResponse(500, "Error", e.getMessage()));
+        }
     }
 
     @GetMapping
     @RequestMapping("/getOngoingId")
-    public ResponseEntity<StandardMessageResponse> getOngoingId(){
+    public ResponseEntity<StandardMessageResponse> getOngoingId() {
         String id = ordersService.getOngoingOrderId();
         return ResponseEntity.ok(new StandardMessageResponse(200, "Success", id));
     }
+
+    @GetMapping
+    @RequestMapping("/getOrdersCount")
+    public ResponseEntity<StandardMessageResponse> getOrdersCount() {
+        int count = ordersService.getOrdersCount();
+        return ResponseEntity.ok(new StandardMessageResponse(200, "Success", count));
+    }
+
+
+
 }

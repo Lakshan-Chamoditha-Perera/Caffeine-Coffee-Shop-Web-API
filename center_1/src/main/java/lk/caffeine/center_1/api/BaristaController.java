@@ -25,7 +25,6 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class BaristaController {
     private final BaristaService baristaService;
-
     @GetMapping
     @RequestMapping("/getAll")
     public StandardMessageResponse getAll() {

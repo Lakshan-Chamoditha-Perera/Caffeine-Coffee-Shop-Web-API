@@ -14,6 +14,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 @EnableJpaRepositories
 public interface OrdersRepository extends JpaRepository<Orders, String> {
-    @Query(value="SELECT MAX (id) FROM Orders")
+    @Query(value="SELECT MAX (orderId) FROM Orders")
     String getLastOrderId();
+
+    @Query(value="SELECT COUNT (orderId) FROM Orders")
+    int getOrdersCount();
 }
