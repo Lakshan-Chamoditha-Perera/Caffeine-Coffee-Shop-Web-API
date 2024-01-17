@@ -18,5 +18,8 @@ public interface OrdersRepository extends JpaRepository<Orders, String> {
     String getLastOrderId();
 
     @Query(value="SELECT COUNT (orderId) FROM Orders")
-    int getOrdersCount();
+    Integer getOrdersCount();
+
+    @Query(value="SELECT SUM (total) FROM Orders")
+    Double getTotalIncome();
 }

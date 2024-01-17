@@ -42,6 +42,11 @@ public class OrdersController {
         return ResponseEntity.ok(new StandardMessageResponse(200, "Success", count));
     }
 
-
+    @GetMapping
+    @RequestMapping("/getTotalIncome")
+    public ResponseEntity<StandardMessageResponse> getTotalIncome() {
+        double total = ordersService.getTotalIncome();
+        return ResponseEntity.ok(new StandardMessageResponse(200, "Success", total));
+    }
 
 }

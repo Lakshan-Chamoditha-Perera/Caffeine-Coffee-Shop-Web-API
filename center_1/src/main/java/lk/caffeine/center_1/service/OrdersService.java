@@ -8,5 +8,6 @@ import lk.caffeine.center_1.dto.OrdersDto;
  */
 public interface OrdersService extends SuperService<OrdersDto, String> {
     String getOngoingOrderId();
-    int getOrdersCount();
+    Integer getOrdersCount();
+    Double getTotalIncome();
 }

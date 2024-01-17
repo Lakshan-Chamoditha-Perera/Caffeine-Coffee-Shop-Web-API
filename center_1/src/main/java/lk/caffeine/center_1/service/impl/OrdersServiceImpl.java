@@ -81,7 +81,13 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
     @Override
-    public int getOrdersCount() {
+    public Integer getOrdersCount() {
         return ordersRepository.getOrdersCount();
     }
+
+    @Override
+    public Double getTotalIncome() {
+        return ordersRepository.getTotalIncome();
+    }
+
 }
