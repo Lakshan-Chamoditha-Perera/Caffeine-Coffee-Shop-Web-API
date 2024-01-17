@@ -24,5 +24,5 @@ public class OrdersDto {
 
     private String customer_id;
 
-    private Coffee_Order_DetailDto[] coffee_order_detail;
+    private OrderDetailDto[] coffee_order_detail;
 }

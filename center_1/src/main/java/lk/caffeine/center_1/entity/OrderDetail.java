@@ -16,13 +16,10 @@ import java.sql.Date;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Coffee_Order_Detail {
+public class OrderDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    @CreationTimestamp
-    private Date date;
 
     @ManyToOne(cascade ={ CascadeType.PERSIST, CascadeType.PERSIST})
     @ToString.Exclude

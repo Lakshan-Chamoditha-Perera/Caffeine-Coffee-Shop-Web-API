@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class CoffeeDto {
 
-    private String cid;
+    private String code;
 
     @NotNull(message = "Coffee Name is mandatory")
     private String name;
@@ -25,8 +25,8 @@ public class CoffeeDto {
 
     @NotNull(message = "Coffee Price is mandatory")
     @Positive(message = "Coffee Price must be positive")
-    private double price;
-    private double caffeineContent;
+    private Double price;
+    private Double caffeineContent;
 
     @NotNull(message = "Barista cannot be null")
     private BaristaDto barista;

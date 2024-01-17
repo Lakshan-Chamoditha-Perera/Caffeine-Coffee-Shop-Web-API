@@ -21,15 +21,15 @@ import java.util.List;
 @Data
 public class Coffee {
     @Id
-    private String cid;
+    private String code;
     private String name;
     private String description;
-    private double price;
-    private double caffeineContent;
+    private Double price;
+    private Double caffeineContent;
 
     @OneToMany(mappedBy = "coffee")
     @ToString.Exclude
-    private List<Coffee_Order_Detail> coffee_order_detail;
+    private List<OrderDetail> _order_detail;
     @ManyToOne
     private Barista barista;
 }

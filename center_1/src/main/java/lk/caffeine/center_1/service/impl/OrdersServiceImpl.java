@@ -3,10 +3,10 @@ package lk.caffeine.center_1.service.impl;
 import lk.caffeine.center_1.dao.CoffeeRepository;
 import lk.caffeine.center_1.dao.CustomerRepository;
 import lk.caffeine.center_1.dao.OrdersRepository;
-import lk.caffeine.center_1.dto.Coffee_Order_DetailDto;
+import lk.caffeine.center_1.dto.OrderDetailDto;
 import lk.caffeine.center_1.dto.OrdersDto;
 import lk.caffeine.center_1.entity.Coffee;
-import lk.caffeine.center_1.entity.Coffee_Order_Detail;
+import lk.caffeine.center_1.entity.OrderDetail;
 import lk.caffeine.center_1.entity.Customer;
 import lk.caffeine.center_1.entity.Orders;
 import lk.caffeine.center_1.service.OrdersService;
@@ -29,32 +29,32 @@ public class OrdersServiceImpl implements OrdersService {
 
     @Override
     public boolean save(OrdersDto dto) {
-        Orders orders = new Orders();
-        orders.setOrder_id(dto.getId());
-        orders.setTotal(dto.getTotal());
-
-//        set customer
-        Customer customerById = customerRepository.findCustomerById(dto.getCustomer_id());
-        orders.setCustomer(customerById);
-
-//        set coffee order details
-        System.out.println(Arrays.toString(dto.getCoffee_order_detail()));
-        System.out.println("---------------------------------------------------------------------------------------");
-        for (Coffee_Order_DetailDto coffeeOrderDetailDto : dto.getCoffee_order_detail()) {
-            Coffee_Order_Detail coffeeOrderDetail = toCODEntity(coffeeOrderDetailDto, orders);
-            System.out.println(coffeeOrderDetail);
-            orders.getCoffee_order_details_List().add(coffeeOrderDetail);
-        }
-        System.out.println("---------------------------------------------------------------------------------------");
-        ordersRepository.save(orders);
+//        Orders orders = new Orders();
+//        orders.setOrderId(dto.getId());
+//        orders.setTotal(dto.getTotal());
+//
+////        set customer
+//        Customer customerById = customerRepository.findCustomerById(dto.getCustomer_id());
+//        orders.setCustomer(customerById);
+//
+////        set coffee order details
+//        System.out.println(Arrays.toString(dto.getCoffee_order_detail()));
+//        System.out.println("---------------------------------------------------------------------------------------");
+//        for (OrderDetailDto coffeeOrderDetailDto : dto.getCoffee_order_detail()) {
+//            OrderDetail coffeeOrderDetail = toCODEntity(coffeeOrderDetailDto, orders);
+//            System.out.println(coffeeOrderDetail);
+//            orders.getOrderDetails().add(coffeeOrderDetail);
+//        }
+//        System.out.println("---------------------------------------------------------------------------------------");
+//        ordersRepository.save(orders);
         return true;
     }
 
-    private Coffee_Order_Detail toCODEntity(Coffee_Order_DetailDto coffeeOrderDetailDto, Orders order) {
-        Coffee_Order_Detail coffeeOrderDetail = new Coffee_Order_Detail();
+    private OrderDetail toCODEntity(OrderDetailDto coffeeOrderDetailDto, Orders order) {
+        OrderDetail coffeeOrderDetail = new OrderDetail();
         coffeeOrderDetail.setOrder(order);
 
-        Coffee coffeeByCid = coffeeRepository.findCoffeeByCid(coffeeOrderDetailDto.getCoffee_id());
+        Coffee coffeeByCid = coffeeRepository.findCoffeeByCid(coffeeOrderDetailDto.getCoffeeCode());
         coffeeOrderDetail.setCoffee(coffeeByCid);
 
         coffeeOrderDetail.setQty(coffeeOrderDetailDto.getQty());

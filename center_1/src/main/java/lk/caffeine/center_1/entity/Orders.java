@@ -21,17 +21,18 @@ import java.util.List;
 @ToString
 public class Orders {
     @Id
-    private String order_id;
+    private String orderId;
 
     @CreationTimestamp
     private Date date;
 
-    private double total;
+    private Double total;
 
     @ManyToOne
     private Customer customer;
 
-    @OneToMany(mappedBy = "order", cascade = {CascadeType.REFRESH},targetEntity = Coffee_Order_Detail.class)
-    private List<Coffee_Order_Detail> coffee_order_details_List = new ArrayList<>();
+    @OneToMany(mappedBy = "order", cascade = {CascadeType.REFRESH},targetEntity = OrderDetail.class)
+    @ToString.Exclude
+    private List<OrderDetail> orderDetailList = new ArrayList<>();
 
 }
