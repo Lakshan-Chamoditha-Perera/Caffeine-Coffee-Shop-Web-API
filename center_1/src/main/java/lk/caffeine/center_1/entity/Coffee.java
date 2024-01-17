@@ -2,13 +2,13 @@ package lk.caffeine.center_1.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,9 +27,9 @@ public class Coffee {
     private Double price;
     private Double caffeineContent;
 
-    @OneToMany(mappedBy = "coffee")
-    @ToString.Exclude
-    private List<OrderDetail> _order_detail;
+    @ManyToMany(mappedBy = "coffeeList", targetEntity = Orders.class)
+    private List<Orders> ordersList = new ArrayList<>();
+
     @ManyToOne
     private Barista barista;
 }

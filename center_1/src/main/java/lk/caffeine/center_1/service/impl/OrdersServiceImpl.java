@@ -3,18 +3,17 @@ package lk.caffeine.center_1.service.impl;
 import lk.caffeine.center_1.dao.CoffeeRepository;
 import lk.caffeine.center_1.dao.CustomerRepository;
 import lk.caffeine.center_1.dao.OrdersRepository;
-import lk.caffeine.center_1.dto.OrderDetailDto;
 import lk.caffeine.center_1.dto.OrdersDto;
 import lk.caffeine.center_1.entity.Coffee;
-import lk.caffeine.center_1.entity.OrderDetail;
 import lk.caffeine.center_1.entity.Customer;
 import lk.caffeine.center_1.entity.Orders;
 import lk.caffeine.center_1.service.OrdersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Author: shan
@@ -28,38 +27,32 @@ public class OrdersServiceImpl implements OrdersService {
     private final CustomerRepository customerRepository;
 
     @Override
-    public boolean save(OrdersDto dto) {
-//        Orders orders = new Orders();
-//        orders.setOrderId(dto.getId());
-//        orders.setTotal(dto.getTotal());
-//
-////        set customer
-//        Customer customerById = customerRepository.findCustomerById(dto.getCustomer_id());
-//        orders.setCustomer(customerById);
-//
-////        set coffee order details
-//        System.out.println(Arrays.toString(dto.getCoffee_order_detail()));
-//        System.out.println("---------------------------------------------------------------------------------------");
-//        for (OrderDetailDto coffeeOrderDetailDto : dto.getCoffee_order_detail()) {
-//            OrderDetail coffeeOrderDetail = toCODEntity(coffeeOrderDetailDto, orders);
-//            System.out.println(coffeeOrderDetail);
-//            orders.getOrderDetails().add(coffeeOrderDetail);
-//        }
-//        System.out.println("---------------------------------------------------------------------------------------");
-//        ordersRepository.save(orders);
+    public boolean save(OrdersDto ordersDto) {
+        Optional<Customer> customer = customerRepository.findById(ordersDto.getCustomer_id());
+        if (!customer.isPresent()) {
+            throw new RuntimeException("No customer for id: " + ordersDto.getCustomer_id());
+        }
+
+        Orders orders = new Orders();
+        orders.setOrderId(ordersDto.getId());
+        orders.setDate(ordersDto.getDate());
+        orders.setTotal(ordersDto.getTotal());
+        orders.setCustomer(customer.get());
+
+        List<Coffee> coffeeList = new ArrayList<>();
+        for (int i = 0; i < ordersDto.getCoffeeList().size(); i++) {
+            Optional<Coffee> coffee = coffeeRepository.findById(ordersDto.getCoffeeList().get(i).getCode());
+            if (!coffee.isPresent()) {
+                throw new RuntimeException("No coffee for id: " + ordersDto.getCoffeeList().get(i).getCode());
+            }
+            coffeeList.add(coffee.get());
+        }
+
+        orders.setCoffeeList(coffeeList);
+        ordersRepository.save(orders);
         return true;
     }
 
-    private OrderDetail toCODEntity(OrderDetailDto coffeeOrderDetailDto, Orders order) {
-        OrderDetail coffeeOrderDetail = new OrderDetail();
-        coffeeOrderDetail.setOrder(order);
-
-        Coffee coffeeByCid = coffeeRepository.findCoffeeByCid(coffeeOrderDetailDto.getCoffeeCode());
-        coffeeOrderDetail.setCoffee(coffeeByCid);
-
-        coffeeOrderDetail.setQty(coffeeOrderDetailDto.getQty());
-        return coffeeOrderDetail;
-    }
 
     @Override
     public boolean update(OrdersDto dto) {

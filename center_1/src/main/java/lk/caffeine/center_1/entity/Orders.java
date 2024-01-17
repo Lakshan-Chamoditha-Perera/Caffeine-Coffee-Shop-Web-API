@@ -31,8 +31,7 @@ public class Orders {
     @ManyToOne
     private Customer customer;
 
-    @OneToMany(mappedBy = "order", cascade = {CascadeType.REFRESH},targetEntity = OrderDetail.class)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @ToString.Exclude
-    private List<OrderDetail> orderDetailList = new ArrayList<>();
-
+    private List<Coffee> coffeeList = new ArrayList<>();
 }

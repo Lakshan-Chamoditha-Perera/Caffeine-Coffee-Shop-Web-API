@@ -1,10 +1,16 @@
 package lk.caffeine.center_1.dto;
 
+import jakarta.persistence.ManyToMany;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import lk.caffeine.center_1.entity.Orders;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Author: shan
@@ -30,4 +36,8 @@ public class CoffeeDto {
 
     @NotNull(message = "Barista cannot be null")
     private BaristaDto barista;
+
+    @ToString.Exclude
+    private List<OrdersDto> ordersList = new ArrayList<>();
+
 }

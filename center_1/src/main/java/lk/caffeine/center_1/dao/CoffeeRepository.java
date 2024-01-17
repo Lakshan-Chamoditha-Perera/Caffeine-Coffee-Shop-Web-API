@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 /**
  * Author: shan
  * Created: 1/16/24 12:25 AM
@@ -12,7 +14,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 @EnableJpaRepositories
 public interface CoffeeRepository extends JpaRepository<Coffee,String> {
-    Coffee findCoffeeByCid(String cid);
-
-
+    Optional<Coffee> findCoffeeByCode(String code);
 }

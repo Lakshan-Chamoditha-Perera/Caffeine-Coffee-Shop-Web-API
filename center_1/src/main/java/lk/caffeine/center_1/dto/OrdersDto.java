@@ -4,6 +4,8 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Author: shan
@@ -19,10 +21,8 @@ public class OrdersDto {
     private String id;
     @CreationTimestamp
     private Date date;
-
     private double total;
-
     private String customer_id;
 
-    private OrderDetailDto[] coffee_order_detail;
+    private List<CoffeeDto> coffeeList = new ArrayList<>();
 }
