@@ -1,9 +1,8 @@
 package com.caffeine.center_2.api;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.caffeine.center_2.util.payload.StandardMessageResponse;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Author: shan
@@ -11,14 +10,30 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/ingredient")
+
 public class IngredientController {
     @GetMapping
-    public String getIngredient() {
-        return "ingredient";
+    @RequestMapping("/{id}")
+    public ResponseEntity<StandardMessageResponse> getIngredient() {
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping
-    public String postIngredient() {
-        return "ingredient";
+    @RequestMapping("/save")
+    public ResponseEntity<StandardMessageResponse>  postIngredient() {
+        return ResponseEntity.ok(new StandardMessageResponse(200, "Success", null));
     }
+
+    @DeleteMapping
+    @RequestMapping("/delete/{id}")
+    public ResponseEntity<StandardMessageResponse>  deleteIngredient(String id) {
+        return ResponseEntity.ok(new StandardMessageResponse(200, "Success", null));
+    }
+
+    @GetMapping
+    @RequestMapping("/getAll")
+    public ResponseEntity<StandardMessageResponse>  getAllIngredient() {
+        return ResponseEntity.ok(new StandardMessageResponse(200, "Success", null));
+    }
+
 }
