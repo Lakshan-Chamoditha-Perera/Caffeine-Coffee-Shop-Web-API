@@ -48,4 +48,10 @@ public class IngredientServiceImpl implements IngredientService {
     public List<IngredientDto> findAll() {
         return null;
     }
+
+
+    @Override
+    public boolean existsById(String id) {
+        return ingredientRepository.existsById(id);
+    }
 }
