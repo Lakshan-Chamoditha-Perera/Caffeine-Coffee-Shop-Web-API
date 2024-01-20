@@ -50,7 +50,8 @@ public class IngredientServiceImpl implements IngredientService {
 
     @Override
     public List<IngredientDto> findAll() {
-        return null;
+        List<Ingredient> all = ingredientRepository.findAll();
+        return mapper.map(all, List.class);
     }
 
 
