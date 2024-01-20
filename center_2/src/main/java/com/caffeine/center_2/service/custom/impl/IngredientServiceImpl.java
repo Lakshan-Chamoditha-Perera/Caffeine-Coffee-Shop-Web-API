@@ -2,8 +2,10 @@ package com.caffeine.center_2.service.custom.impl;
 
 import com.caffeine.center_2.dao.IngredientRepository;
 import com.caffeine.center_2.dto.IngredientDto;
+import com.caffeine.center_2.entity.Ingredient;
 import com.caffeine.center_2.service.custom.IngredientService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,9 +18,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class IngredientServiceImpl implements IngredientService {
     private final IngredientRepository ingredientRepository;
+    private final ModelMapper mapper;
+
     @Override
-    public IngredientDto save(IngredientDto dto) {
-        return null;
+    public IngredientDto save(IngredientDto dto) throws RuntimeException {
+        if (ingredientRepository.existsById(dto.getId())) {
+            throw new RuntimeException("Ingredient already exists");
+        }
+        ingredientRepository.save(mapper.map(dto, Ingredient.class));
+        return dto;
     }
 
     @Override
