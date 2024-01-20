@@ -1,8 +1,10 @@
 package com.caffeine.center_2.api;
 
 import com.caffeine.center_2.dto.IngredientDto;
+import com.caffeine.center_2.service.custom.IngredientService;
 import com.caffeine.center_2.util.payload.StandardMessageResponse;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -18,12 +20,13 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/ingredient")
-
+@RequiredArgsConstructor
 public class IngredientController {
+    private final IngredientService ingredientService;
+
     @GetMapping
     @RequestMapping("/{id}")
     public ResponseEntity<StandardMessageResponse> getIngredient() {
-
         return ResponseEntity.ok().build();
     }
 
@@ -33,11 +36,8 @@ public class IngredientController {
         if (bindingResult.hasErrors()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new StandardMessageResponse(500, "Fail", bindingResult.getAllErrors()));
         }
-
-
-
         try {
-//         ---------------------
+//        ---------------------save
             return ResponseEntity.ok(new StandardMessageResponse(200, "Success", null));
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new StandardMessageResponse(500, "Error ", e.getMessage()));
@@ -46,14 +46,20 @@ public class IngredientController {
     }
 
     @DeleteMapping
-    @RequestMapping("/delete/{id}")
-    public ResponseEntity<StandardMessageResponse> deleteIngredient(String id) {
-        return ResponseEntity.ok(new StandardMessageResponse(200, "Success", null));
+    @RequestMapping("/delete")
+    public ResponseEntity<StandardMessageResponse> deleteIngredient(@RequestParam String id) {
+        try {
+//        ---------------------delete
+            return ResponseEntity.ok(new StandardMessageResponse(200, "Success", null));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new StandardMessageResponse(500, "Error ", e.getMessage()));
+        }
     }
 
     @GetMapping
     @RequestMapping("/getAll")
     public ResponseEntity<StandardMessageResponse> getAllIngredient() {
+//        ---------------------getAll
         return ResponseEntity.ok(new StandardMessageResponse(200, "Success", null));
     }
 
