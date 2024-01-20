@@ -8,7 +8,10 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Author: shan
@@ -25,6 +28,7 @@ public class IngredientServiceImpl implements IngredientService {
         if (ingredientRepository.existsById(dto.getId())) {
             throw new RuntimeException("Ingredient already exists");
         }
+        dto.setAdded_date(Date.valueOf(LocalDate.now()));
         ingredientRepository.save(mapper.map(dto, Ingredient.class));
         return dto;
     }
@@ -51,7 +55,10 @@ public class IngredientServiceImpl implements IngredientService {
     @Override
     public List<IngredientDto> findAll() {
         List<Ingredient> all = ingredientRepository.findAll();
-        return mapper.map(all, List.class);
+        return all.stream().map(
+                element -> mapper.map(
+                        element, IngredientDto.class)
+        ).collect(Collectors.toList());
     }
 
 

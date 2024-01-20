@@ -37,6 +37,9 @@ public class IngredientDto {
 
     private String added_by;
 
+    private Date added_date;
+
     @NotNull(message = "Expire date quantity is mandatory")
     private Date expire_date;
+
 }
