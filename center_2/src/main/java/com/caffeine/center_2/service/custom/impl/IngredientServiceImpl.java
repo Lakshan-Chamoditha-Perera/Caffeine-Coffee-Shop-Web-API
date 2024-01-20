@@ -34,8 +34,12 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @Override
-    public Boolean update(IngredientDto dto) {
-        return null;
+    public Boolean update(IngredientDto dto){
+        if (!ingredientRepository.existsById(dto.getId())) {
+            throw new RuntimeException("No such Ingredient for update..!");
+        }
+        ingredientRepository.save(mapper.map(dto, Ingredient.class));
+        return true;
     }
 
     @Override
