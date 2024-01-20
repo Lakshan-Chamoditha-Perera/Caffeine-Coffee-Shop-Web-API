@@ -8,5 +8,5 @@ import com.caffeine.center_2.service.SuperService;
  * Created: 1/20/24 12:03 AM
  */
 public interface IngredientService extends SuperService<IngredientDto, String> {
-    boolean existsById(String id);
+    Boolean existsById(String id);
 }

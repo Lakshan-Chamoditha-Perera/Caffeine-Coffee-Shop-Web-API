@@ -36,7 +36,11 @@ public class IngredientServiceImpl implements IngredientService {
 
     @Override
     public Boolean delete(String id) {
-        return null;
+        if (!ingredientRepository.existsById(id)) {
+            throw new RuntimeException("No Ingredient for delete..!");
+        }
+        ingredientRepository.deleteById(id);
+        return true;
     }
 
     @Override
@@ -51,7 +55,7 @@ public class IngredientServiceImpl implements IngredientService {
 
 
     @Override
-    public boolean existsById(String id) {
+    public Boolean existsById(String id) {
         return ingredientRepository.existsById(id);
     }
 }
