@@ -18,7 +18,7 @@ public class IngredientServiceImpl implements IngredientService {
     private final IngredientRepository ingredientRepository;
     @Override
     public IngredientDto save(IngredientDto dto) {
-
+        return null;
     }
 
     @Override
