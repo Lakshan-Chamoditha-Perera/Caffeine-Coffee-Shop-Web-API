@@ -36,22 +36,27 @@ public class BaristaController {
     @RequestMapping("/save")
     public ResponseEntity<StandardMessageResponse> save(@Valid @RequestBody BaristaDto baristaDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new StandardMessageResponse(500, "Fail", bindingResult.getAllErrors()));
+            return ResponseEntity.status(
+                    HttpStatus.BAD_REQUEST).body(
+                            new StandardMessageResponse(500, "Fail", bindingResult.getAllErrors()));
         }
         try {
             baristaService.save(baristaDto);
             return ResponseEntity.ok(new StandardMessageResponse(200, "Success", null));
         } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new StandardMessageResponse(500, "Error ", e.getMessage()));
+            return ResponseEntity.status(
+                    HttpStatus.BAD_REQUEST).body(
+                            new StandardMessageResponse(500, "Error ", e.getMessage()));
         }
     }
 
     @PatchMapping(consumes = "application/json")
     @RequestMapping("/update")
     public ResponseEntity<StandardMessageResponse> update(@Valid @RequestBody BaristaDto baristaDto, BindingResult bindingResult) {
-        System.out.println(baristaDto);
         if (bindingResult.hasErrors()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new StandardMessageResponse(500, "Fail", bindingResult.getAllErrors()));
+            return ResponseEntity.status(
+                    HttpStatus.BAD_REQUEST).body(
+                            new StandardMessageResponse(500, "Fail", bindingResult.getAllErrors()));
         }
         try {
             if (baristaService.existsById(baristaDto.getId())) {
